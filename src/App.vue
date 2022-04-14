@@ -2,9 +2,12 @@
   <div id="app">
     <div class="container mx-auto">
       <h1 class="my-5 text-4xl font-bold">Notes app</h1>
+     <!-- Message Empty -->
       <Message v-if="message" :message="message" />
+      <!-- New Note -->
       <NewNote :new_note="new_note" @addNote="addNote" />
-      <Notes :notes="notes" />
+      
+      <Notes :notes="notes" @remove="removeNote"/>
     </div>
   </div>
 </template>
@@ -70,6 +73,9 @@ export default {
       this.new_note.title = "";
       this.new_note.desc = "";
     },
+    removeNote(index){
+      this.notes.splice(index,1)
+    }
   },
 };
 </script>
