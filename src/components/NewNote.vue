@@ -1,16 +1,16 @@
 <template>
   <!-- add New note -->
-  <div class="new_note">
-      <label>Tittle</label>
+  <div class="mt-10 new_note">
+    <label class="text-white">Tittle</label>
     <input
       type="text"
       v-model="new_note.title"
-      class="w-full px-4 py-2 leading-tight text-gray-700 bg-gray-100 border-2 border-gray-200 rounded appearance-none focus:outline-none focus:bg-green-100 focus:border-green-200"
+      class="w-full px-4 py-2 my-3 leading-tight text-gray-700 bg-gray-100 border-2 border-gray-200 rounded appearance-none focus:outline-none focus:bg-green-100 focus:border-green-200"
     />
-      <label>Description</label>
+    <label class="text-white ">Description</label>
     <textarea
       v-model="new_note.desc"
-      class="w-full px-4 py-2 my-5 leading-tight text-gray-700 bg-gray-100 border-2 border-gray-200 rounded appearance-none focus:outline-none focus:bg-green-100 focus:border-green-200"
+      class="w-full px-4 py-2 my-3 leading-tight text-gray-700 bg-gray-100 border-2 border-gray-200 rounded appearance-none focus:outline-none focus:bg-green-100 focus:border-green-200"
     >
     </textarea>
     <button
@@ -24,16 +24,16 @@
 </template>
 <script>
 export default {
-    props:{
-        new_note:{
-            type:Object,
-            required:true
-        }
+  props: {
+    new_note: {
+      type: Object,
+      required: true,
     },
-    methods:{
-        addNote(){
-            this.$emit('addNote', this.new_note)
-        }
-    }
-}
+  },
+  methods: {
+    addNote() {
+      this.$emit("addNote", this.new_note);
+    },
+  },
+};
 </script>
