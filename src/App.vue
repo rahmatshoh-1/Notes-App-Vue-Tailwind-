@@ -7,6 +7,12 @@
       <NewNote :new_note="new_note" @addNote="addNote" />
       <div class="note_header">
         <h1 class="my-5 text-3xl font-bold text-white">{{ title }}</h1>
+          <!-- Search -->
+      <Search
+        :value="search"
+        placeholder="Find your note"
+        @search="search = $event"
+      />
         <div class="flex justify-between text-center icons">
           <svg
             :class="{ active: grid }"
@@ -48,7 +54,8 @@
           </svg>
         </div>
       </div>
-      <Notes :notes="notes" :grid="grid" @remove="removeNote" />
+    
+      <Notes :notes="notesFilter" :grid="grid" @remove="removeNote" />
     </div>
   </div>
 </template>
@@ -57,17 +64,21 @@
 import Message from "@/components/Message.vue";
 import NewNote from "@/components/NewNote.vue";
 import Notes from "@/components/Notes.vue";
+import Search from "@/components/Search.vue";
+
 export default {
   components: {
     Message,
     NewNote,
     Notes,
+    Search,
   },
   data() {
     return {
       title: "Notes App",
       message: null,
       grid: true,
+      search: "",
       new_note: {
         title: "",
         desc: "",
@@ -93,6 +104,23 @@ export default {
         },
       ],
     };
+  },
+    computed:{
+    notesFilter () {
+      let array = this.notes,
+          search = this.search
+       if (!search) return array
+      //  small
+      search = search.trim().toLowerCase()
+      // filter
+      array = array.filter(function(item){
+        if(item.title.toLowerCase().indexOf(search) !== -1){
+          return item
+        }
+      })
+      // error
+      return array
+    }
   },
 
   methods: {
